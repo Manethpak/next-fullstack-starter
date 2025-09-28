@@ -2,6 +2,16 @@
   "name": "next-fullstack-starter",
   "version": "0.1.0",
   "private": true,
+  "author": "Maneth Pak <manethpak.dev@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/manethpak/next-fullstack-starter",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/manethpak/next-fullstack-starter.git"
+  },
+  "engines": {
+    "node": "^20.12.1"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -10,6 +20,7 @@
     "auth:gen": "npx @better-auth/cli@latest generate"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.2.2",
     "@prisma/adapter-better-sqlite3": "^6.8.1",
     "@prisma/client": "^6.8.1",
     "@radix-ui/react-avatar": "^1.1.9",
@@ -25,8 +36,10 @@
     "next-themes": "^0.4.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-hook-form": "^7.63.0",
     "sonner": "^2.0.3",
-    "tailwind-merge": "^3.3.0"
+    "tailwind-merge": "^3.3.0",
+    "zod": "^4.1.11"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

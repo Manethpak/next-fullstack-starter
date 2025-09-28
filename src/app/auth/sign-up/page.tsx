@@ -18,22 +18,68 @@ import { signUp } from "@/lib/auth-client";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useForm, Controller, SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+
+const SignUpSchema = z
+  .object({
+    firstName: z
+      .string()
+      .min(1, "First name is required")
+      .max(50, "First name is too long"),
+    lastName: z
+      .string()
+      .min(1, "Last name is required")
+      .max(50, "Last name is too long"),
+    email: z
+      .string()
+      .min(1, "Email is required")
+      .email("Invalid email address"),
+    password: z
+      .string()
+      .min(8, "Password must be at least 8 characters")
+      .max(128, "Password is too long"),
+    passwordConfirmation: z
+      .string()
+      .min(1, "Password confirmation is required"),
+    image: z.any().optional(),
+  })
+  .refine((data) => data.password === data.passwordConfirmation, {
+    message: "Passwords don't match",
+    path: ["passwordConfirmation"],
+  });
+
+type SignUpValues = z.infer<typeof SignUpSchema>;
 
 export default function SignUp() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirmation, setPasswordConfirmation] = useState("");
-  const [image, setImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
+  const {
+    register,
+    handleSubmit,
+    control,
+    watch,
+    formState: { errors },
+  } = useForm<SignUpValues>({
+    resolver: zodResolver(SignUpSchema),
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      passwordConfirmation: "",
+      image: null,
+    },
+  });
+
+  const watchedImage = watch("image");
+
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      setImage(file);
       const reader = new FileReader();
       reader.onloadend = () => {
         setImagePreview(reader.result as string);
@@ -42,7 +88,8 @@ export default function SignUp() {
     }
   };
 
-  const handleSubmit = async () => {
+  const onSubmit: SubmitHandler<SignUpValues> = async (values) => {
+    const { firstName, lastName, email, password, image } = values;
     await signUp.email({
       email,
       password,
@@ -85,31 +132,37 @@ export default function SignUp() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="grid gap-4">
+            <form
+              className="grid gap-4"
+              onSubmit={handleSubmit(onSubmit)}
+              noValidate
+            >
               <div className="grid grid-cols-2 gap-4">
                 <div className="grid gap-2">
                   <Label htmlFor="first-name">First name</Label>
                   <Input
                     id="first-name"
                     placeholder="Max"
-                    required
-                    onChange={(e) => {
-                      setFirstName(e.target.value);
-                    }}
-                    value={firstName}
+                    {...register("firstName")}
                   />
+                  {errors.firstName && (
+                    <p className="text-sm text-red-500">
+                      {errors.firstName.message}
+                    </p>
+                  )}
                 </div>
                 <div className="grid gap-2">
                   <Label htmlFor="last-name">Last name</Label>
                   <Input
                     id="last-name"
                     placeholder="Robinson"
-                    required
-                    onChange={(e) => {
-                      setLastName(e.target.value);
-                    }}
-                    value={lastName}
+                    {...register("lastName")}
                   />
+                  {errors.lastName && (
+                    <p className="text-sm text-red-500">
+                      {errors.lastName.message}
+                    </p>
+                  )}
                 </div>
               </div>
               <div className="grid gap-2">
@@ -118,34 +171,41 @@ export default function SignUp() {
                   id="email"
                   type="email"
                   placeholder="m@example.com"
-                  required
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                  }}
-                  value={email}
+                  {...register("email")}
                 />
+                {errors.email && (
+                  <p className="text-sm text-red-500">{errors.email.message}</p>
+                )}
               </div>
               <div className="grid gap-2">
                 <Label htmlFor="password">Password</Label>
                 <Input
                   id="password"
                   type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  {...register("password")}
                   autoComplete="new-password"
                   placeholder="Password"
                 />
+                {errors.password && (
+                  <p className="text-sm text-red-500">
+                    {errors.password.message}
+                  </p>
+                )}
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="password">Confirm Password</Label>
+                <Label htmlFor="password_confirmation">Confirm Password</Label>
                 <Input
                   id="password_confirmation"
                   type="password"
-                  value={passwordConfirmation}
-                  onChange={(e) => setPasswordConfirmation(e.target.value)}
+                  {...register("passwordConfirmation")}
                   autoComplete="new-password"
                   placeholder="Confirm Password"
                 />
+                {errors.passwordConfirmation && (
+                  <p className="text-sm text-red-500">
+                    {errors.passwordConfirmation.message}
+                  </p>
+                )}
               </div>
               <div className="grid gap-2">
                 <Label htmlFor="image">Profile Image (optional)</Label>
@@ -161,18 +221,28 @@ export default function SignUp() {
                     </div>
                   )}
                   <div className="flex items-center gap-2 w-full">
-                    <Input
-                      id="image"
-                      type="file"
-                      accept="image/*"
-                      onChange={handleImageChange}
-                      className="w-full"
+                    <Controller
+                      control={control}
+                      name="image"
+                      render={({ field: { onChange, value, ...field } }) => (
+                        <Input
+                          {...field}
+                          id="image"
+                          type="file"
+                          accept="image/*"
+                          onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            onChange(file);
+                            handleImageChange(e);
+                          }}
+                          className="w-full"
+                        />
+                      )}
                     />
                     {imagePreview && (
                       <X
                         className="cursor-pointer"
                         onClick={() => {
-                          setImage(null);
                           setImagePreview(null);
                         }}
                       />
@@ -180,19 +250,14 @@ export default function SignUp() {
                   </div>
                 </div>
               </div>
-              <Button
-                type="submit"
-                className="w-full"
-                disabled={loading}
-                onClick={handleSubmit}
-              >
+              <Button type="submit" className="w-full" disabled={loading}>
                 {loading ? (
                   <Loader2 size={16} className="animate-spin" />
                 ) : (
                   "Create an account"
                 )}
               </Button>
-            </div>
+            </form>
           </CardContent>
           <CardFooter>
             <div className="flex justify-center w-full border-t py-4">
