@@ -75,7 +75,8 @@ export default function SignUp() {
     },
   });
 
-  const watchedImage = watch("image");
+  // Watch image field for form validation
+  watch("image");
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -224,7 +225,7 @@ export default function SignUp() {
                     <Controller
                       control={control}
                       name="image"
-                      render={({ field: { onChange, value, ...field } }) => (
+                      render={({ field: { onChange, ...field } }) => (
                         <Input
                           {...field}
                           id="image"

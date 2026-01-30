@@ -44,3 +44,4 @@ dev.db
 
 # Generated files
 src/generated/
+/src/generated/prisma
