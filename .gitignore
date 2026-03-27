@@ -43,5 +43,4 @@ next-env.d.ts
 dev.db
 
 # Generated files
-src/generated/
-/src/generated/prisma
+generated
