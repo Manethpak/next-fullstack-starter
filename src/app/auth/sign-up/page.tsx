@@ -24,25 +24,14 @@ import { z } from "zod";
 
 const SignUpSchema = z
   .object({
-    firstName: z
-      .string()
-      .min(1, "First name is required")
-      .max(50, "First name is too long"),
-    lastName: z
-      .string()
-      .min(1, "Last name is required")
-      .max(50, "Last name is too long"),
-    email: z
-      .string()
-      .min(1, "Email is required")
-      .email("Invalid email address"),
+    firstName: z.string().min(1, "First name is required").max(50, "First name is too long"),
+    lastName: z.string().min(1, "Last name is required").max(50, "Last name is too long"),
+    email: z.string().min(1, "Email is required").email("Invalid email address"),
     password: z
       .string()
       .min(8, "Password must be at least 8 characters")
       .max(128, "Password is too long"),
-    passwordConfirmation: z
-      .string()
-      .min(1, "Password confirmation is required"),
+    passwordConfirmation: z.string().min(1, "Password confirmation is required"),
     image: z.any().optional(),
   })
   .refine((data) => data.password === data.passwordConfirmation, {
@@ -133,50 +122,27 @@ export default function SignUp() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <form
-              className="grid gap-4"
-              onSubmit={handleSubmit(onSubmit)}
-              noValidate
-            >
+            <form className="grid gap-4" onSubmit={handleSubmit(onSubmit)} noValidate>
               <div className="grid grid-cols-2 gap-4">
                 <div className="grid gap-2">
                   <Label htmlFor="first-name">First name</Label>
-                  <Input
-                    id="first-name"
-                    placeholder="Max"
-                    {...register("firstName")}
-                  />
+                  <Input id="first-name" placeholder="Max" {...register("firstName")} />
                   {errors.firstName && (
-                    <p className="text-sm text-red-500">
-                      {errors.firstName.message}
-                    </p>
+                    <p className="text-sm text-red-500">{errors.firstName.message}</p>
                   )}
                 </div>
                 <div className="grid gap-2">
                   <Label htmlFor="last-name">Last name</Label>
-                  <Input
-                    id="last-name"
-                    placeholder="Robinson"
-                    {...register("lastName")}
-                  />
+                  <Input id="last-name" placeholder="Robinson" {...register("lastName")} />
                   {errors.lastName && (
-                    <p className="text-sm text-red-500">
-                      {errors.lastName.message}
-                    </p>
+                    <p className="text-sm text-red-500">{errors.lastName.message}</p>
                   )}
                 </div>
               </div>
               <div className="grid gap-2">
                 <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="m@example.com"
-                  {...register("email")}
-                />
-                {errors.email && (
-                  <p className="text-sm text-red-500">{errors.email.message}</p>
-                )}
+                <Input id="email" type="email" placeholder="m@example.com" {...register("email")} />
+                {errors.email && <p className="text-sm text-red-500">{errors.email.message}</p>}
               </div>
               <div className="grid gap-2">
                 <Label htmlFor="password">Password</Label>
@@ -188,9 +154,7 @@ export default function SignUp() {
                   placeholder="Password"
                 />
                 {errors.password && (
-                  <p className="text-sm text-red-500">
-                    {errors.password.message}
-                  </p>
+                  <p className="text-sm text-red-500">{errors.password.message}</p>
                 )}
               </div>
               <div className="grid gap-2">
@@ -203,9 +167,7 @@ export default function SignUp() {
                   placeholder="Confirm Password"
                 />
                 {errors.passwordConfirmation && (
-                  <p className="text-sm text-red-500">
-                    {errors.passwordConfirmation.message}
-                  </p>
+                  <p className="text-sm text-red-500">{errors.passwordConfirmation.message}</p>
                 )}
               </div>
               <div className="grid gap-2">
@@ -252,11 +214,7 @@ export default function SignUp() {
                 </div>
               </div>
               <Button type="submit" className="w-full" disabled={loading}>
-                {loading ? (
-                  <Loader2 size={16} className="animate-spin" />
-                ) : (
-                  "Create an account"
-                )}
+                {loading ? <Loader2 size={16} className="animate-spin" /> : "Create an account"}
               </Button>
             </form>
           </CardContent>

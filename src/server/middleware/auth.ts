@@ -23,7 +23,7 @@ export const authGuard = HonoFactory.createMiddleware(async (c, next) => {
       {
         message: "Unauthorized",
       },
-      401
+      401,
     );
   }
 

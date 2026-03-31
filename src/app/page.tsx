@@ -13,9 +13,8 @@ export default function Home() {
                   Next.js Fullstack starter Kit
                 </h1>
                 <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
-                  A fullstack starter kit built with Next.js, Tailwind CSS,
-                  Prisma for database, better-auth for
-                  Authentication/Authorization and Hono for API router.
+                  A fullstack starter kit built with Next.js, Tailwind CSS, Prisma for database,
+                  better-auth for Authentication/Authorization and Hono for API router.
                 </p>
               </div>
               <div className="flex flex-col gap-2 min-[400px]:flex-row">
@@ -35,8 +34,7 @@ export default function Home() {
                 <div className="space-y-2">
                   <h3 className="text-xl font-bold">Prisma Integration</h3>
                   <p className="text-gray-500 dark:text-gray-400">
-                    Type-safe database access with Prisma ORM for efficient data
-                    management.
+                    Type-safe database access with Prisma ORM for efficient data management.
                   </p>
                 </div>
               </div>
@@ -47,8 +45,7 @@ export default function Home() {
                 <div className="space-y-2">
                   <h3 className="text-xl font-bold">Better Auth</h3>
                   <p className="text-gray-500 dark:text-gray-400">
-                    Secure authentication system with session management and
-                    user roles.
+                    Secure authentication system with session management and user roles.
                   </p>
                 </div>
               </div>
@@ -59,8 +56,7 @@ export default function Home() {
                 <div className="space-y-2">
                   <h3 className="text-xl font-bold">Hono Integration</h3>
                   <p className="text-gray-500 dark:text-gray-400">
-                    Fast, lightweight web framework for building modern APIs and
-                    applications.
+                    Fast, lightweight web framework for building modern APIs and applications.
                   </p>
                 </div>
               </div>
@@ -71,8 +67,7 @@ export default function Home() {
       <footer className="w-full border-t py-6">
         <div className="container mx-auto flex flex-col items-center justify-center gap-4 px-4 md:px-6">
           <p className="text-center text-sm text-gray-500 dark:text-gray-400">
-            © {new Date().getFullYear()} Next.js Starter Kit. All rights
-            reserved.
+            © {new Date().getFullYear()} Next.js Starter Kit. All rights reserved.
           </p>
         </div>
       </footer>

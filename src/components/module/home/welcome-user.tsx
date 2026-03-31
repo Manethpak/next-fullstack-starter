@@ -27,9 +27,7 @@ const WelcomeUser = () => {
           <div className="flex flex-col items-center space-y-4">
             <Avatar className="h-16 w-16">
               <AvatarImage src={data.user.image || ""} alt={data.user.name} />
-              <AvatarFallback>
-                {data.user.name.charAt(0).toUpperCase()}
-              </AvatarFallback>
+              <AvatarFallback>{data.user.name.charAt(0).toUpperCase()}</AvatarFallback>
             </Avatar>
 
             <div className="text-center space-y-2">
@@ -55,7 +53,7 @@ const WelcomeUser = () => {
                   onResponse: () => {
                     setLoading(false);
                   },
-                }
+                },
               )
             }
             disabled={loading}

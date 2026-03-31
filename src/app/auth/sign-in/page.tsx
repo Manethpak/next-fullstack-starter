@@ -69,7 +69,7 @@ export default function SignIn() {
           setLoading(false);
           toast.error("Something went wrong");
         },
-      }
+      },
     );
   };
 
@@ -87,17 +87,11 @@ export default function SignIn() {
         <Card>
           <CardHeader className="space-y-1">
             <CardTitle className="text-2xl font-bold">Sign in</CardTitle>
-            <CardDescription>
-              Enter your credentials to access your account
-            </CardDescription>
+            <CardDescription>Enter your credentials to access your account</CardDescription>
           </CardHeader>
 
           <CardContent className="space-y-4">
-            <form
-              className="space-y-4"
-              onSubmit={handleSubmit(onSubmit)}
-              noValidate
-            >
+            <form className="space-y-4" onSubmit={handleSubmit(onSubmit)} noValidate>
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
                 <Input
@@ -106,17 +100,12 @@ export default function SignIn() {
                   placeholder="Enter your email"
                   {...register("email")}
                 />
-                {errors.email && (
-                  <p className="text-sm text-red-500">{errors.email.message}</p>
-                )}
+                {errors.email && <p className="text-sm text-red-500">{errors.email.message}</p>}
               </div>
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <Label htmlFor="password">Password</Label>
-                  <Link
-                    href="#"
-                    className="text-sm font-medium text-primary hover:underline"
-                  >
+                  <Link href="#" className="text-sm font-medium text-primary hover:underline">
                     Forgot password?
                   </Link>
                 </div>
@@ -127,9 +116,7 @@ export default function SignIn() {
                   {...register("password")}
                 />
                 {errors.password && (
-                  <p className="text-sm text-red-500">
-                    {errors.password.message}
-                  </p>
+                  <p className="text-sm text-red-500">{errors.password.message}</p>
                 )}
               </div>
               <div className="flex items-center space-x-2">
@@ -140,9 +127,7 @@ export default function SignIn() {
                     <Checkbox
                       id="remember"
                       checked={field.value}
-                      onCheckedChange={(checked) =>
-                        field.onChange(checked === true)
-                      }
+                      onCheckedChange={(checked) => field.onChange(checked === true)}
                     />
                   )}
                 />
@@ -161,10 +146,7 @@ export default function SignIn() {
           <CardFooter className="flex flex-col space-y-4">
             <div className="text-center text-sm">
               Don&apos;t have an account?{" "}
-              <Link
-                href="/sign-up"
-                className="font-medium text-primary hover:underline"
-              >
+              <Link href="/sign-up" className="font-medium text-primary hover:underline">
                 Sign up
               </Link>
             </div>

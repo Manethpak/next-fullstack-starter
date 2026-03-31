@@ -1,4 +1,3 @@
-"server only";
 import { auth } from "@/lib/auth";
 
 import { createFactory } from "hono/factory";
