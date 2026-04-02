@@ -12,3 +12,7 @@ export const queryClient = new QueryClient({
     },
   },
 });
+
+export function invalidateQuery(...keys: unknown[]) {
+  queryClient.invalidateQueries({ queryKey: keys });
+}

@@ -1,4 +1,4 @@
-import { auth } from "@/lib/auth";
+import { auth } from "@/server/core/auth";
 import { HonoFactory } from "../factory";
 
 export const applySession = HonoFactory.createMiddleware(async (c, next) => {

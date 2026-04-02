@@ -1,14 +1,16 @@
 import { HonoFactory } from "./factory";
 import { applySession } from "./middleware/auth";
-import { auth } from "@/lib/auth";
+import { auth } from "@/server/core/auth";
 import { cors } from "hono/cors";
 import { postsRouter } from "./modules/posts/posts.router";
 import { usersRouter } from "./modules/users/users.router";
+import { logger } from "hono/logger";
 
-export const baseUrl = process.env.BASE_URL || "http://localhost:3000";
+const baseUrl = process.env.BASE_URL || "http://localhost:3000";
 
 const app = HonoFactory.createApp()
   .basePath("/api")
+  .use(logger())
   .use("*", applySession)
   .on(
     ["POST", "GET"],

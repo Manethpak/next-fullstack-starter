@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma";
+import { prisma } from "@/server/core/prisma";
 import type { CreatePostInput, UpdatePostInput } from "./posts.schema";
 
 export async function getPostsByAuthor(authorId: string) {

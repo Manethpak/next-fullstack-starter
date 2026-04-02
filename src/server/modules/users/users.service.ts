@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma";
+import { prisma } from "@/server/core/prisma";
 import type { UpdateProfileInput } from "./users.schema";
 
 export async function getUserById(id: string) {
