@@ -245,3 +245,4 @@ import { signIn, signOut, signUp, useSession } from "@/lib/auth-client";
 - **Prisma**: Always import from `@/lib/prisma` (singleton pattern)
 - **Hono routers**: Always use `HonoFactory.createApp()` for type-safe context
 - **API client**: Always use `apiClient` from `@/lib/api-client` — never raw `fetch()`
+- **Lint/format scope**: `pnpm lint`, `pnpm lint:fix`, `pnpm fmt`, and `pnpm fmt:check` target `src/` only

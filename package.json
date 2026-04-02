@@ -14,10 +14,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "oxlint",
-    "lint:fix": "oxlint --fix",
-    "fmt": "oxfmt",
-    "fmt:check": "oxfmt --check",
+    "lint": "oxlint src",
+    "lint:fix": "oxlint --fix src",
+    "fmt": "oxfmt src",
+    "fmt:check": "oxfmt --check src",
     "auth:gen": "npx @better-auth/cli@latest generate"
   },
   "dependencies": {

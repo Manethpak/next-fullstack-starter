@@ -138,13 +138,16 @@ src/
 
 ## 📜 Scripts
 
-| Script          | Description                              |
-| :-------------- | :--------------------------------------- |
-| `pnpm dev`      | Starts the development server            |
-| `pnpm build`    | Builds the application for production    |
-| `pnpm start`    | Starts the production server             |
-| `pnpm lint`     | Runs ESLint for code quality checks      |
-| `pnpm auth:gen` | Generates Better Auth client/server code |
+| Script           | Description                              |
+| :--------------- | :--------------------------------------- |
+| `pnpm dev`       | Starts the development server            |
+| `pnpm build`     | Builds the application for production    |
+| `pnpm start`     | Starts the production server             |
+| `pnpm lint`      | Runs oxlint on `src/`                    |
+| `pnpm lint:fix`  | Runs oxlint with fixes on `src/`         |
+| `pnpm fmt`       | Formats files in `src/`                  |
+| `pnpm fmt:check` | Checks formatting for files in `src/`    |
+| `pnpm auth:gen`  | Generates Better Auth client/server code |
 
 ## 📄 License
 
