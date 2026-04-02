@@ -1,13 +1,13 @@
 {
-  "name": "next-fullstack-starter",
+  "name": "next-hono-starter",
   "version": "0.2.0",
   "private": true,
-  "homepage": "https://github.com/manethpak/next-fullstack-starter",
+  "homepage": "https://github.com/manethpak/next-hono-starter",
   "license": "MIT",
   "author": "Maneth Pak <manethpak.dev@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/manethpak/next-fullstack-starter.git"
+    "url": "https://github.com/manethpak/next-hono-starter.git"
   },
   "type": "module",
   "scripts": {

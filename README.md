@@ -42,9 +42,25 @@ Client (React) → TanStack Query → Typed Hono RPC Client → Hono Router → 
 ### 1. Clone and Install
 
 ```bash
-git clone https://github.com/manethpak/next-fullstack-starter.git
-cd next-fullstack-starter
+git clone https://github.com/manethpak/next-hono-starter.git
+cd next-hono-starter
 pnpm install
+```
+
+### Use as a Next.js Template
+
+Create a new app directly from this repository with `create-next-app`:
+
+```bash
+pnpm dlx create-next-app@latest my-app --example https://github.com/manethpak/next-hono-starter
+```
+
+Then set up the environment and database:
+
+```bash
+cp .example.env .env
+pnpm prisma generate
+pnpm prisma db push
 ```
 
 ### 2. Environment Setup
@@ -62,8 +78,8 @@ openssl rand -base64 32
 ### 3. Database Initialization
 
 ```bash
-npx prisma generate
-npx prisma db push
+pnpm prisma generate
+pnpm prisma migrate dev
 ```
 
 ### 4. Start Development
