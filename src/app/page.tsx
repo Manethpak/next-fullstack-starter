@@ -17,9 +17,7 @@ export default function Home() {
                   better-auth for Authentication/Authorization and Hono for API router.
                 </p>
               </div>
-              <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                <WelcomeUser />
-              </div>
+              <WelcomeUser />
             </div>
           </div>
         </section>

@@ -1,5 +1,5 @@
 import { PrismaClient } from "@/generated/client";
-import { auth } from "@/lib/auth";
+import { auth } from "@/server/core/auth";
 import { PrismaPg } from "@prisma/adapter-pg";
 
 const adapter = new PrismaPg({
